@@ -1,0 +1,15 @@
+body {
+  margin: 0;
+  font-family: 'Ubuntu', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-image: url(https://images.unsplash.com/photo-1550432163-9cb326104944?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fG1hY2hpbmUlMjBsZWFybmluZ3xlbnwwfDB8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=60);
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}

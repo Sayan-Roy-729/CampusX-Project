@@ -1,0 +1,26 @@
+.heroInfo__container {
+    margin-top: 15%;
+    margin-left: auto;
+    text-align: center;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.heroInfo__main {
+    background-color: rgba(0, 0, 0, 0.7) ;
+    padding: 30px;
+    border: none;
+    border-top-right-radius: 40px;
+    border-bottom-left-radius: 40px;
+}
+
+.heroInfo__title {
+    font-size: 50px;
+}
+
+.heroInfo__quote {
+    font-family: 'Dancing Script', cursive;
+    font-size: 30px;
+}
