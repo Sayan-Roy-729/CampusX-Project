@@ -1,11 +1,14 @@
 const express = require('express');
 
 const courseController = require('../../controllers/admin/CourseControllers');
+const { contentUpload } = require('../../controllers/admin/contentUploadController');
 
 const router = express.Router();
 
 // api/v1/ml/admin/video [POST]
 router.post('/admin/video', courseController.postNewVideoUpload);
+
+router.post('/admin/upload', contentUpload);
 
 // api/v1/ml/admin/quiz [POST]
 router.post('/admin/quiz', courseController.postQuizUpload);

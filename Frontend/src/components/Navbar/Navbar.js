@@ -30,7 +30,7 @@ const Navbar = props => {
     };
 
     return (
-        <nav className="navbar navbar-expand-lg navbar-dark" style={{position: 'sticky', top: '0px', left: '0px'}}>
+        <nav className="navbar navbar-expand-lg navbar-dark" style={{position: 'sticky', top: '0px', left: '0px', zIndex: '10',}}>
             <Link to="/" className="navbar-brand ml-5 font-weight-bold" style={{fontSize: '35px', fontFamily: "'Pacifico', cursive"}}>
                 campusX
             </Link>
