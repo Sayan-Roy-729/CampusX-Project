@@ -1,7 +1,11 @@
 import "./LoadingSpinner.css";
 
 const LoadingSpinner = (props) => {
-    return <div className="loader"></div>;
+    return (
+        <div className="loading__container">
+            <div className="loader"></div>
+        </div>
+    );
 };
 
 export default LoadingSpinner;

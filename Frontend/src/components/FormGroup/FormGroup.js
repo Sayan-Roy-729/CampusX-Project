@@ -1,7 +1,7 @@
 const FormGroup = (props) => {
     return (
         <div className={`form-group ${props.className}`}>
-            <label for="exampleInputEmail1">{props.label}</label>
+            <label htmlFor="exampleInputEmail1">{props.label}</label>
             <input
                 type="text"
                 className="form-control"

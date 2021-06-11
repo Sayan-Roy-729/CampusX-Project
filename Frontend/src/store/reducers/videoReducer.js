@@ -2,7 +2,7 @@ import { videoConstants } from '../actions/Constants';
 
 const initialState = {
     videos: [],
-    loading: true,
+    loading: false,
     errorMessage: null,
 };
 
@@ -24,6 +24,21 @@ const videoReducer = (state = initialState, action) => {
                 ...state,
                 loading: false,
                 errorMessage: action.error,
+            };
+        case videoConstants.UPLOAD_VIDEO_AND_CONTENT_LOADING:
+            return {
+                ...state,
+                loading: true,
+            };
+        case videoConstants.UPLOAD_VIDEO_AND_CONTENT_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+            };
+        case videoConstants.UPLOAD_VIDEO_AND_CONTENT_FAILURE:
+            return {
+                ...state,
+                loading: false,
             };
         default:
             return state;

@@ -57,6 +57,14 @@ const Navbar = props => {
 
                     <li className="nav-item">
                         {
+                            authState.user && authState.user.email === 'rsayan553@gmail.com' && (
+                                <Link to = '/admin/add' className="nav-link" onClick={logoutHandler}>Admin</Link>
+                            )
+                        }
+                    </li>
+
+                    <li className="nav-item">
+                        {
                             authState.user ? (
                                 <Link to = '/' className="nav-link" onClick={logoutHandler}>Logout</Link>
                             ) : (

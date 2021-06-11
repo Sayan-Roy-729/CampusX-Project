@@ -1,10 +1,11 @@
 import { useState } from "react";
+import { useDispatch } from 'react-redux';
 
 import FormGroup from "../FormGroup/FormGroup";
 import FormRadioButton from "../FormRadioButton/FormRadioButton";
 import FormCheckBox from "../FormCheckBox/FormCheckBox";
-import axios from "../../config/axios";
 import alertMessage from '../../config/alertMessage';
+import { uploadContent } from '../../store/actions/videoActions';
 
 const AdminForm = (props) => {
     const [inputVideoTitle, setInputVideoTitle] = useState("");
@@ -22,11 +23,13 @@ const AdminForm = (props) => {
     const [inputFurtherReadingTitle, setInputFurtherReadingTitle] = useState("");
     const [inputFurtherReadingURL, setInputFurtherReadingURL] = useState("");
 
+    const dispatch = useDispatch();
+
     const quizOptionChooseHandler = (event) => {
         setQuizOptionsAns(event.target.value);
     };
 
-    const formSubmitHandler = (event) => {
+    const formSubmitHandler = async (event) => {
         event.preventDefault();
 
         const contents = new URLSearchParams();
@@ -70,22 +73,12 @@ const AdminForm = (props) => {
             return;
         }
 
-        axios({
-            method: "POST",
-            url: "/admin/upload",
-            headers: {
-                "content-type": "application/x-www-form-urlencoded;charset=utf-8",
-            },
-            data: contents,
-        })
-            .then((response) => {
-                console.log(response);
-                alertMessage('success', 'Successful!', 'Content added successfully', true, false);
-            })
-            .catch((err) => {
-                console.log(err);
-                alertMessage('error', 'Error!', 'Failed to upload! Try again', false, true);
-            });
+        try {
+            await dispatch(uploadContent(contents));
+            alertMessage('success', 'Successful!', 'Content added successfully', true, false);
+        } catch (error) {
+            alertMessage('error', 'Error!', 'Failed to upload! Try again', false, true);
+        }
     };
 
     return (
