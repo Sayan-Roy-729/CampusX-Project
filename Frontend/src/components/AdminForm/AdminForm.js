@@ -33,8 +33,8 @@ const AdminForm = (props) => {
         event.preventDefault();
 
         const contents = new URLSearchParams();
-        contents.append("videoTitle", inputVideoTitle);
-        contents.append("videoUrl", inputVideo);
+        contents.append("videoTitle", inputVideo);
+        contents.append("videoUrl", inputVideoTitle);
         contents.append("quizQuestion", inputQuizQuestion);
         contents.append("quizOption1", inputQuizAnswer1);
         contents.append("quizOption2", inputQuizAnswer2);
@@ -91,7 +91,7 @@ const AdminForm = (props) => {
             />
 
             <FormGroup
-                label="Video i-frame tag"
+                label="Video URL"
                 description="Please enter the iframe YouTube Video URL. This is required"
                 value={inputVideoTitle}
                 onChange={setInputVideoTitle}

@@ -4,7 +4,7 @@
     font-weight: bold;
 }
 
-.show, .collapsing {
+.navbar-collapse.show, .navbar-collapse.collapsing {
     background: rgba(0, 0, 0, 0.5);
     border: none;
     border-radius: 20px;
