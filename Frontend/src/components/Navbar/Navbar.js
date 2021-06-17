@@ -7,7 +7,6 @@ import { googleSignIn, userSignOut } from '../../store/actions/authActions';
 
 const Navbar = props => {
     const authState = useSelector(state => state.auth);
-    const videoState = useSelector(state => state.video);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -48,11 +47,7 @@ const Navbar = props => {
                     </li>
 
                     <li>
-                        {
-                            videoState.videos.length > 0 && (
-                                <Link to={`/videos/${videoState.videos[0].id}`} className="nav-link">Videos</Link>
-                            )
-                        }
+                        <Link to='/videos' className="nav-link">Videos</Link>
                     </li>
 
                     <li className="nav-item">

@@ -2,6 +2,10 @@ import { videoConstants } from '../actions/Constants';
 
 const initialState = {
     videos: [],
+    quizzes: [],
+    task: {},
+    interview: [], 
+    furtherReading: [],
     loading: false,
     errorMessage: null,
 };
@@ -39,6 +43,19 @@ const videoReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loading: false,
+            };
+        case videoConstants.GET_VIDEO_CONTENTS_LOADING:
+            return {
+                ...state,
+                loading: true,
+            };
+        case videoConstants.GET_VIDEO_CONTENT_SUCCESS:
+            return {
+                ...state,
+                quizzes: action.quizzes,
+                task: action.task,
+                interview: action.interviewQuestion,
+                furtherReading: action.furtherReading,
             };
         default:
             return state;

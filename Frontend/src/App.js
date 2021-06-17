@@ -21,7 +21,7 @@ function App() {
             <Navbar />
             <Switch>
                 <Route path = '/' exact component = {HomePage}/>
-                <Route path = '/videos/:id' component = {VideoPage} />
+                <Route path = '/videos' component = {VideoPage} />
                 <Route path = '/admin/add' component = { AdminPage }/>
             </Switch>
         </>

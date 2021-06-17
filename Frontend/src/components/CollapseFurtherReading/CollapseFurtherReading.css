@@ -1,0 +1,15 @@
+.Further__Reading span {
+    padding-right: 10px;
+}
+
+.Further__Reading a {
+    text-decoration: none;
+    color: gray;
+    transition: all 0.5s ease-in-out;
+    font-weight: bolder;
+}
+
+.Further__Reading a:hover {
+    text-decoration: none;
+    color: black;
+}

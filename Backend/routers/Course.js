@@ -8,6 +8,6 @@ const router = express.Router();
 router.get('/video', courseControllers.getVideos);
 
 // api/v1/ml/video-content
-router.get('/video-content', courseControllers.getVideoContents);
+router.post('/video-content', courseControllers.getVideoContents);
 
 module.exports = router;

@@ -24,6 +24,10 @@ exports.getVideos = (req, res, next) => {
 exports.getVideoContents = (req, res, next) => {
     const { videoId } = req.body;
     let loadedVideo;
+    let loadedQuiz;
+    let loadedTask;
+    let loadedInterviewQuestion;
+    let loadedFurtherReading;
 
     Video.findOne({ where: { id: videoId } })
         .then(video => {
@@ -31,9 +35,33 @@ exports.getVideoContents = (req, res, next) => {
                 const error = new Error('Video not found. Check the video id and try again');
                 error.statusCode = 403;
                 throw error;
+                return;
             } else {
                 loadedVideo = video;
+                return video.getQuizzes();
             }
+        })
+        .then(quiz => {
+            loadedQuiz = quiz;
+            return loadedVideo.getTask();
+        })
+        .then(task => {
+            loadedTask = task;
+            return loadedVideo.getInterviewQuestions();
+        })
+        .then(interviewQuestion => {
+            loadedInterviewQuestion = interviewQuestion;
+            return loadedVideo.getFurtherReadings();
+        })
+        .then(furtherReading => {
+            loadedFurtherReading = furtherReading;
+            res.status(200).json({
+                message: 'Ok',
+                quiz: loadedQuiz,
+                task: loadedTask,
+                interviewQuestion: loadedInterviewQuestion,
+                furtherReading: loadedFurtherReading,
+            });
         })
         .catch((err) => {
             if (!err.statusCode) {
@@ -41,5 +69,4 @@ exports.getVideoContents = (req, res, next) => {
             }
             next(err);
         });
-    res.status(200).json({ message: "Ok" });
 };

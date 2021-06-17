@@ -25,11 +25,36 @@ export const getVideos = () => {
     };
 };
 
+// Fetch the contents of the video
 export const videoContent = (videoId) => {
     return (dispatch) => {
         dispatch({
             type: videoConstants.GET_VIDEO_CONTENTS_LOADING,
         });
+
+        axios
+            .post("/video-content", { videoId })
+            .then((response) => {
+                const quizzes = response.data.quiz;
+                const task = response.data.task;
+                const interviewQuestion = response.data.interviewQuestion;
+                const furtherReading = response.data.furtherReading;
+
+                dispatch({
+                    type: videoConstants.GET_VIDEO_CONTENT_SUCCESS,
+                    quizzes,
+                    task,
+                    interviewQuestion,
+                    furtherReading,
+                });
+            })
+            .catch((err) => {
+                console.log(err);
+                dispatch({
+                    type: videoConstants.GET_VIDEO_CONTENT_FAILURE,
+                    errorMessage: err.message,
+                });
+            });
     };
 };
 
@@ -49,7 +74,7 @@ export const uploadContent = (formData) => {
                 },
                 data: formData,
             });
-    
+
             dispatch({
                 type: videoConstants.UPLOAD_VIDEO_AND_CONTENT_SUCCESS,
                 content: response.data,

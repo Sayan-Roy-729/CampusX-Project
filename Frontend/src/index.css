@@ -1,3 +1,29 @@
+/* Works on Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: orange;
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: rgb(75, 75, 74);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: rgb(105, 105, 105);
+  border-radius: 20px;
+  border: 2px solid orange;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+
 body {
   margin: 0;
   font-family: 'Ubuntu', sans-serif;
