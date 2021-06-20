@@ -1,41 +1,10 @@
-/* Works on Firefox */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: orange;
-}
-
-/* Works on Chrome, Edge, and Safari */
-*::-webkit-scrollbar {
-  width: 12px;
-}
-
-*::-webkit-scrollbar-track {
-  background: rgb(75, 75, 74);
-}
-
-*::-webkit-scrollbar-thumb {
-  background-color: rgb(105, 105, 105);
-  border-radius: 20px;
-  border: 2px solid orange;
-}
-
-*::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
-
-
 body {
   margin: 0;
   font-family: 'Ubuntu', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-image: url(https://images.unsplash.com/photo-1550432163-9cb326104944?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fG1hY2hpbmUlMjBsZWFybmluZ3xlbnwwfDB8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=60);
+  /* background-image: url(https://images.unsplash.com/photo-1550432163-9cb326104944?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fG1hY2hpbmUlMjBsZWFybmluZ3xlbnwwfDB8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=60);
   background-size: cover;
-  background-position: center;
-  min-height: 100vh;
+  background-position: center; */
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}

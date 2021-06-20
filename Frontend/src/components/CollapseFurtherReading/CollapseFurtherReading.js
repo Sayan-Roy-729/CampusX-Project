@@ -22,7 +22,7 @@ const CollapseFurtherReading = props => {
                                 return (
                                     <div className = "Further__Reading" key = {index}>
                                         <span>{index + 1}</span>
-                                        <a key = {item.id} href = {item.url} className="FurtherReading__Title__Link" target='_blank'>{item.title}</a>
+                                        <a key = {item.id} href = {item.url} className="FurtherReading__Title__Link" target='_blank' rel="noreferrer">{item.title}</a>
                                     </div>
                                 )
                             })

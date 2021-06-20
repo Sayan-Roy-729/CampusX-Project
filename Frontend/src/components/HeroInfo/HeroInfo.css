@@ -24,3 +24,16 @@
     font-family: 'Dancing Script', cursive;
     font-size: 30px;
 }
+
+/* Changes */
+.carousel-item img {
+    height: calc(100vh - 40px);
+    width: 100%;
+}
+
+.heroInfo__speaker {
+    display: block;
+    color: gray;
+    font-style: italic;
+    font-size: 14px;
+}

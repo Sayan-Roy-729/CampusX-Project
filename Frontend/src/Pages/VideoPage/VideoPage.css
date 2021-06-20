@@ -1,0 +1,15 @@
+.video__list__group, .video_play_content_group {
+    height: 80vh;
+    max-height: 80vh;
+    overflow-y: auto;
+
+    /* Hide Scrollbar */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.video__list__group::-webkit-scrollbar,
+.video_play_content_group::-webkit-scrollbar {
+    display: none;
+}

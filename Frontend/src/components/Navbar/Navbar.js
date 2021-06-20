@@ -20,7 +20,7 @@ const Navbar = props => {
         });
     }, []);
 
-    const signInHandler = () => {
+    const loginHandler = () => {
         dispatch(googleSignIn());
     };
 
@@ -29,42 +29,29 @@ const Navbar = props => {
     };
 
     return (
-        <nav className="navbar navbar-expand-lg navbar-dark" style={{position: 'sticky', top: '0px', left: '0px', zIndex: '10',}}>
-            <Link to="/" className="navbar-brand ml-5 font-weight-bold" style={{fontSize: '35px', fontFamily: "'Pacifico', cursive"}}>
-                campusX
-            </Link>
-        
-            <button className="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false"
-                aria-label="Toggle navigation" data-target="#exnavbar" aria-controls="exnavbar">
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+            <a className="navbar-brand" href="/" style={{fontFamily: 'Pacifico'}}>campusX</a>
+            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
             </button>
 
-            <div className="collapse navbar-collapse pr-5" id="exnavbar">
-                
-                <ul className="navbar-nav ml-auto mr-5 pr-5" style={{fontSize: '19px'}}>
-                    <li>
-                        <Link to="/" className="nav-link">Home</Link>
-                    </li>
-
-                    <li>
-                        <Link to='/videos' className="nav-link">Videos</Link>
-                    </li>
-
+            <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul className="navbar-nav ml-auto">
                     <li className="nav-item">
-                        {/* {
-                            authState.user && authState.user.email === 'rsayan553@gmail.com' && (
-                                <Link to = '/admin/add' className="nav-link">Admin</Link>
-                            )
-                        } */}
-                        <Link to = '/admin/add' className="nav-link">Admin</Link>
+                        <Link className="nav-link" to="/">Home</Link>
                     </li>
-
+                    <li className="nav-item">
+                        <Link className="nav-link" to="/videos">Videos</Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link className="nav-link" to="/admin">Admin</Link>
+                    </li>
                     <li className="nav-item">
                         {
                             authState.user ? (
-                                <Link to = '/' className="nav-link" onClick={logoutHandler}>Logout</Link>
+                                <Link className="nav-link" to="#" tabIndex="-1" aria-disabled="true" onClick={logoutHandler}>Logout</Link>
                             ) : (
-                                <Link to = '/' className="nav-link" onClick={signInHandler}>Login</Link>
+                                <Link className="nav-link" to="#" tabIndex="-1" aria-disabled="true" onClick={loginHandler}>Login</Link>
                             )
                         }
                     </li>

@@ -1,12 +1,23 @@
-import './HeroInfo.css';
+import { Link } from "react-router-dom";
 
-const HeroInfo = props => {
+import "./HeroInfo.css";
+
+const HeroInfo = (props) => {
     return (
-        <div className="heroInfo__container">
-            <div className="heroInfo__main">
-                <h1 className="font-weight-bold heroInfo__title">WELCOME</h1>
-                <h4 className="heroInfo__quote">Computers are able to see, hear and learn. <br></br> Welcome to the future.</h4>
-            </div>
+        <div className="jumbotron text-center">
+            <h1 className="display-4">Machine Learning</h1>
+            <p className="lead">
+                Robots are not going to replace humans, they are going to make
+                their jobs much more humane. Difficult, demeaning, demanding,
+                dangerous, dull – these are the jobs robots will be taking.{" "}
+                <span className="heroInfo__speaker">
+                    Sabine Hauert, Co-founder of Robohub.org
+                </span>
+            </p>
+            <hr className="my-4" />
+            <Link className="btn btn-dark btn-lg" to="/videos" role="button">
+                Gets Start
+            </Link>
         </div>
     );
 };

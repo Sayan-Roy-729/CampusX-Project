@@ -52,10 +52,33 @@ const videoReducer = (state = initialState, action) => {
         case videoConstants.GET_VIDEO_CONTENT_SUCCESS:
             return {
                 ...state,
+                loading: false,
                 quizzes: action.quizzes,
                 task: action.task,
                 interview: action.interviewQuestion,
                 furtherReading: action.furtherReading,
+            };
+        case videoConstants.GET_VIDEO_CONTENT_FAILURE:
+            return {
+                ...state,
+                loading: false,
+                errorMessage: action.errorMessage,
+            };
+        case videoConstants.UPLOAD_QUIZ_LOADING:
+            return {
+                ...state,
+                loading: true,
+            };
+        case videoConstants.UPLOAD_QUIZ_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+            };
+        case videoConstants.UPLOAD_QUIZ_FAILURE:
+            return {
+                ...state,
+                loading: false,
+                errorMessage: action.errorMessage,
             };
         default:
             return state;
