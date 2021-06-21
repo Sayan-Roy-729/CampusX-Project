@@ -10,6 +10,7 @@ import VideoPage from './Pages/VideoPage/VideoPage';
 import AdminPage from './Pages/AdminPage/AdminPage';
 import AdminAddPage from './Pages/AdminAddPage/AdminAddPage';
 import AdminUpdatePage from './Pages/AdminUpdatePage/AdminUpdatePage';
+import AdminDeletePage from './Pages/AdminDeletePage/AdminDeletePage';
 import ErrorPage from './Pages/404Error/404Error';
 import { currentSignInUser } from './store/actions/authActions';
 import { getVideos } from './store/actions/videoActions';
@@ -30,6 +31,7 @@ function App() {
                 <Route path = '/videos' component = {VideoPage} />
                 <Route path = "/admin/add" exact component = {AdminAddPage}/>
                 <Route path = '/admin/update' exact component = {AdminUpdatePage}/>
+                <Route path = "/admin/delete" exact component = {AdminDeletePage}/>
                 <Route path = '/admin' exact component = { AdminPage }/>
                 <Route component = {ErrorPage}/>
             </Switch>

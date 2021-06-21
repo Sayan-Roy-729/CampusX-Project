@@ -220,3 +220,115 @@ export const updateFurtherReading = (furtherReadingData) => {
         }
     };
 };
+
+// Delete video
+export const deleteVideo = videoId => {
+    return async dispatch => {
+        dispatch({type: videoConstants.DELETE_LOADING});
+        try {
+            // const response = await axios.delete('/admin/video', videoId);
+            await axios({
+                method: 'DELETE',
+                url: '/admin/video',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                data: {
+                    videoId
+                }
+            });
+            dispatch({type: videoConstants.DELETE_FAILURE});
+        } catch (error) {
+            dispatch({type: videoConstants.DELETE_FAILURE});
+        }
+
+    };
+};
+
+// Delete Task
+export const deleteTask = taskId => {
+    return async dispatch => {
+        dispatch({type: videoConstants.DELETE_LOADING});
+        try {
+            await axios({
+                method: 'DELETE',
+                url: '/admin/task',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                data: {
+                    taskId
+                }
+            });
+            dispatch({type: videoConstants.DELETE_FAILURE});
+        } catch (error) {
+            dispatch({type: videoConstants.DELETE_FAILURE});
+        }
+    };
+}
+
+// Delete Quiz
+export const deleteQuiz = quizId => {
+    return async dispatch => {
+        dispatch({type: videoConstants.DELETE_LOADING});
+        try {
+            await axios({
+                method: 'DELETE',
+                url: '/admin/quiz',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                data: {
+                    quizId
+                }
+            });
+            dispatch({type: videoConstants.DELETE_FAILURE});
+        } catch (error) {
+            dispatch({type: videoConstants.DELETE_FAILURE});
+        }
+    };
+}
+
+// Delete Interview
+export const deleteInterview = interviewId => {
+    return async dispatch => {
+        dispatch({type: videoConstants.DELETE_LOADING});
+        try {
+            await axios({
+                method: 'DELETE',
+                url: '/admin/interview',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                data: {
+                    interviewId
+                }
+            });
+            dispatch({type: videoConstants.DELETE_FAILURE});
+        } catch (error) {
+            dispatch({type: videoConstants.DELETE_FAILURE});
+        }
+    };
+}
+
+// Delete Further Reading
+export const deleteFurtherReading = furtherReadingId => {
+    return async dispatch => {
+        dispatch({type: videoConstants.DELETE_LOADING});
+        try {
+            await axios({
+                method: 'DELETE',
+                url: '/admin/further-reading',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                data: {
+                    furtherReadingId
+                }
+            });
+            dispatch({type: videoConstants.DELETE_FAILURE});
+        } catch (error) {
+            dispatch({type: videoConstants.DELETE_FAILURE});
+        }
+    };
+}

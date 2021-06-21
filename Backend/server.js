@@ -35,6 +35,7 @@ app.get("/", (req, res, next) => {
 // Routes
 app.use('/api/v1/ml', require('./routers/admin/Course'));
 app.use('/api/v1/ml', require('./routers/Course'));
+app.use('/api/v1/ml', require('./routers/admin/DeleteCourse'));
 
 // Error handler (middleware)
 app.use((err, req, res, next) => {

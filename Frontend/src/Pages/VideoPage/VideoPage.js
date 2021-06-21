@@ -28,13 +28,17 @@ const VideoPage = props => {
         }
     }, [dispatch, videoId, videos.length]);
 
-    if (videos.length <= 0 || !videos) {
+    if (!videos || videos.length <= 0) {
         return (
-            <h1>Video Not Found</h1>
+            <div className = "container">
+                <div className = "row my-3">
+                    <div className = "col-md-12">
+                        <h1 className = "text-muted text-center">😔Video Not Found</h1>
+                    </div>
+                </div>
+            </div>
         );
     }
-
-    console.log('Videos: ', videos);
 
     return (
         <div className = "container">

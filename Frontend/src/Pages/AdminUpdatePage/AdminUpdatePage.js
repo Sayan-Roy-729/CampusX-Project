@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import "./AdminUpdatePage.css";
+import VideoContentSelect from "../../components/VideoContentSelect/VideoContentSelect";
 import DropdownSelect from "../../components/DropdownSelect/DropdownSelect";
 import UpdateSelectOptions from "../../components/UpdateSelectOptions/UpdateSelectOptions";
 import QuizForm from "../../components/QuizForm/QuizForm";
@@ -10,12 +11,12 @@ import FurtherReadingForm from "../../components/FurtherReadingForm/FurtherReadi
 import TaskForm from "../../components/TaskForm/TaskForm";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import alertMessage from "../../config/alertMessage";
-import { uploadQuiz, uploadTask } from '../../store/actions/videoActions';
-import { uploadInterview } from '../../store/actions/videoActions';
-import { uploadFurtherReading } from '../../store/actions/videoActions';
-import { videoContent, updateTask } from '../../store/actions/videoActions';
-import { updateQuiz, updateInterview } from '../../store/actions/videoActions';
-import { updateFurtherReading } from '../../store/actions/videoActions';
+import { uploadQuiz, uploadTask } from "../../store/actions/videoActions";
+import { uploadInterview } from "../../store/actions/videoActions";
+import { uploadFurtherReading } from "../../store/actions/videoActions";
+import { videoContent, updateTask } from "../../store/actions/videoActions";
+import { updateQuiz, updateInterview } from "../../store/actions/videoActions";
+import { updateFurtherReading } from "../../store/actions/videoActions";
 
 const AdminUpdatePage = (props) => {
     const [selectedVideoId, setSelectedVideoId] = useState();
@@ -45,7 +46,7 @@ const AdminUpdatePage = (props) => {
     const videos = videosState.videos;
     const dispatch = useDispatch();
 
-    // Select the video 
+    // Select the video
     const videoSelectHandler = (event) => {
         setSelectedVideoId(event.target.value);
     };
@@ -53,10 +54,10 @@ const AdminUpdatePage = (props) => {
     // Select the Contents related to the video
     const videoContentSelectHandler = (event) => {
         setSelectedContent(event.target.value);
-        setInputInterviewQuestion('');
-        setInputInterviewAnswer('');
-        setInputFurtherReadingTitle('');
-        setInputFurtherReadingURL('');
+        setInputInterviewQuestion("");
+        setInputInterviewAnswer("");
+        setInputFurtherReadingTitle("");
+        setInputFurtherReadingURL("");
         if (videosState.task.id) {
             setInputTaskQuestion(videosState.task.question);
             setInputTaskSolution(videosState.task.solution);
@@ -75,8 +76,10 @@ const AdminUpdatePage = (props) => {
     }, [dispatch, selectedVideoId]);
 
     // To update a quiz
-    const selectedQuizToChange = event => {
-        const quiz = videosState.quizzes.find(quiz => quiz.id.toString() === event.target.value );
+    const selectedQuizToChange = (event) => {
+        const quiz = videosState.quizzes.find(
+            (quiz) => quiz.id.toString() === event.target.value
+        );
         setSelectedQuizId(event.target.value);
         setInputQuizQuestion(quiz.question);
         setInputQuizAnswer1(quiz.option1);
@@ -84,19 +87,23 @@ const AdminUpdatePage = (props) => {
         setInputQuizAnswer3(quiz.option3);
         setInputQuizAnswer4(quiz.option4);
         setQuizRightOption(quiz.right);
-    }
+    };
 
     // To update a interview related content
-    const selectedInterviewToChange = event => {
-        const interview = videosState.interview.find(item => item.id.toString() === event.target.value);
+    const selectedInterviewToChange = (event) => {
+        const interview = videosState.interview.find(
+            (item) => item.id.toString() === event.target.value
+        );
         setSelectedInterviewId(event.target.value);
         setInputInterviewQuestion(interview.question);
         setInputInterviewAnswer(interview.answer);
     };
 
     // To update a further reading content
-    const selectedFurtherReadingToChange = event => {
-        const furtherReading = videosState.furtherReading.find(item => item.id.toString() === event.target.value);
+    const selectedFurtherReadingToChange = (event) => {
+        const furtherReading = videosState.furtherReading.find(
+            (item) => item.id.toString() === event.target.value
+        );
         setSelectedFurtherReading(event.target.value);
         setInputFurtherReadingTitle(furtherReading.title);
         setInputFurtherReadingURL(furtherReading.url);
@@ -108,51 +115,63 @@ const AdminUpdatePage = (props) => {
         const contents = new URLSearchParams();
         contents.append("videoId", selectedVideoId);
         try {
-            if (selectedContent === "2" || selectedContent === '5') {
+            if (selectedContent === "2" || selectedContent === "5") {
                 contents.append("option1", inputQuizAnswer1);
                 contents.append("option2", inputQuizAnswer2);
                 contents.append("option3", inputQuizAnswer3);
                 contents.append("option4", inputQuizAnswer4);
                 contents.append("question", inputQuizQuestion);
                 contents.append("right", quizRightOption);
-            } else if (selectedContent === "3" || selectedContent === '6') {
+            } else if (selectedContent === "3" || selectedContent === "6") {
                 contents.append("question", inputInterviewQuestion);
                 contents.append("answer", inputInterviewAnswer);
-            } else if (selectedContent === "4" || selectedContent === '7') {
+            } else if (selectedContent === "4" || selectedContent === "7") {
                 contents.append("title", inputFurtherReadingTitle);
                 contents.append("url", inputFurtherReadingURL);
             }
 
-            if (selectedContent === '1' && videosState.task.id) {
-                contents.append('taskId', videosState.task.id);
-                contents.append('question', inputTaskQuestion);
-                contents.append('solution', inputTaskSolution);
+            if (selectedContent === "1" && videosState.task.id) {
+                contents.append("taskId", videosState.task.id);
+                contents.append("question", inputTaskQuestion);
+                contents.append("solution", inputTaskSolution);
                 await dispatch(updateTask(contents));
-            } else if (selectedContent === '1') {
-                contents.append('question', inputTaskQuestion);
-                contents.append('solution', inputTaskSolution);
+            } else if (selectedContent === "1") {
+                contents.append("question", inputTaskQuestion);
+                contents.append("solution", inputTaskSolution);
                 await dispatch(uploadTask(contents));
             }
 
-            if (selectedContent === '2') {
+            if (selectedContent === "2") {
                 await dispatch(uploadQuiz(contents));
-            } else if (selectedContent === '5') {
-                contents.append('quizId', selectedQuizId);
+            } else if (selectedContent === "5") {
+                contents.append("quizId", selectedQuizId);
                 dispatch(updateQuiz(contents));
-            } else if (selectedContent === '3') {
+            } else if (selectedContent === "3") {
                 await dispatch(uploadInterview(contents));
-            } else if (selectedContent === '6') {
-                contents.append('interviewId', selectedInterviewId);
+            } else if (selectedContent === "6") {
+                contents.append("interviewId", selectedInterviewId);
                 await dispatch(updateInterview(contents));
-            } else if (selectedContent === '4') {
+            } else if (selectedContent === "4") {
                 await dispatch(uploadFurtherReading(contents));
-            } else if (selectedContent === '7') {
-                contents.append('furtherReadingId', selectedFurtherReading);
+            } else if (selectedContent === "7") {
+                contents.append("furtherReadingId", selectedFurtherReading);
                 await dispatch(updateFurtherReading(contents));
             }
-            alertMessage('success', 'Success', 'Your operation is done successfully', false, true);
+            alertMessage(
+                "success",
+                "Success",
+                "Your operation is done successfully",
+                false,
+                true
+            );
         } catch (error) {
-            alertMessage('error', 'Error!', 'Upload failed! Try again.', false, true);
+            alertMessage(
+                "error",
+                "Error!",
+                "Upload failed! Try again.",
+                false,
+                true
+            );
         }
     };
 
@@ -160,67 +179,76 @@ const AdminUpdatePage = (props) => {
         return <LoadingSpinner />;
     }
 
-    return (
-        <div className="container Admin__Update__Form__Container ">
-            <div className="row py-4">
-                <div className="col-md-6">
-                    <h4>Which video you want to update?</h4>
-                    <DropdownSelect
-                        videos={videos}
-                        default="Choose a video from the list"
-                        onChange={videoSelectHandler}
-                    />
-                </div>
-                <div className="col-md-6">
-                    <h4>What topic you want to update?</h4>
-                    <UpdateSelectOptions
-                        selectedVideoId={selectedVideoId}
-                        onChange={videoContentSelectHandler}
-                    />
+    if (!videos || videos.length <= 0) {
+        return (
+            <div className = "container">
+                <div className = "row my-3">
+                    <div className = "col-md-12">
+                        <h1 className = "text-muted text-center">😔Video Not Found</h1>
+                    </div>
                 </div>
             </div>
+        );
+    }
+
+    return (
+        <div className="container Admin__Update__Form__Container ">
+            <VideoContentSelect
+                purpose='update'
+                videoSelectHandler={videoSelectHandler}
+                selectedVideoId={selectedVideoId}
+                videoContentSelectHandler={videoContentSelectHandler}
+            />
             <hr />
             <div className="row pt-3 pb-5">
                 <div className="col-md-12">
                     <form onSubmit={formSubmitHandler}>
                         {/* Select the quiz to update from the dropdown */}
-                        {selectedContent === '5' && (
-                            <div className = "mb-2">
-                                <h5>Please select which quiz you want to update.</h5>
-                                <DropdownSelect 
-                                    default = 'Please choose a quiz...'
-                                    quizzes = {videosState.quizzes}
-                                    onChange = {selectedQuizToChange}
+                        {selectedContent === "5" && (
+                            <div className="mb-2">
+                                <h5>
+                                    Please select which quiz you want to update.
+                                </h5>
+                                <DropdownSelect
+                                    default="Please choose a quiz..."
+                                    quizzes={videosState.quizzes}
+                                    onChange={selectedQuizToChange}
                                 />
                             </div>
                         )}
 
                         {/* Select the interview question to update from the dropdown */}
-                        {selectedContent === '6' && (
-                            <div className = "mb-2">
-                            <h5>Please select which interview you want to update.</h5>
-                            <DropdownSelect 
-                                default = 'Please choose...'
-                                interview = {videosState.interview}
-                                onChange = {selectedInterviewToChange}
-                            />
+                        {selectedContent === "6" && (
+                            <div className="mb-2">
+                                <h5>
+                                    Please select which interview you want to
+                                    update.
+                                </h5>
+                                <DropdownSelect
+                                    default="Please choose..."
+                                    interview={videosState.interview}
+                                    onChange={selectedInterviewToChange}
+                                />
                             </div>
                         )}
 
                         {/* Select the further reading content to update from the dropdown */}
-                        {selectedContent === '7' && (
-                            <div className = "mb-2">
-                            <h5>Please select which further reading content you want to update.</h5>
-                            <DropdownSelect 
-                                default = 'Please choose...'
-                                furtherReading = {videosState.furtherReading}
-                                onChange = {selectedFurtherReadingToChange}
-                            />
+                        {selectedContent === "7" && (
+                            <div className="mb-2">
+                                <h5>
+                                    Please select which further reading content
+                                    you want to update.
+                                </h5>
+                                <DropdownSelect
+                                    default="Please choose..."
+                                    furtherReading={videosState.furtherReading}
+                                    onChange={selectedFurtherReadingToChange}
+                                />
                             </div>
                         )}
 
                         {/* Task Related Input */}
-                        {selectedContent === '1' && (
+                        {selectedContent === "1" && (
                             <TaskForm
                                 taskValue={inputTaskQuestion}
                                 changeTaskValue={setInputTaskQuestion}
@@ -230,7 +258,8 @@ const AdminUpdatePage = (props) => {
                         )}
 
                         {/* Quiz Related Input */}
-                        {((selectedContent === "2" || selectedContent === '5')) && (
+                        {(selectedContent === "2" ||
+                            selectedContent === "5") && (
                             <QuizForm
                                 inputQuizQuestion={inputQuizQuestion}
                                 setInputQuizQuestion={setInputQuizQuestion}
@@ -248,7 +277,8 @@ const AdminUpdatePage = (props) => {
                             />
                         )}
                         {/* Interview Related Input */}
-                        {(selectedContent === "3" || selectedContent === '6') && (
+                        {(selectedContent === "3" ||
+                            selectedContent === "6") && (
                             <InterviewForm
                                 questionValue={inputInterviewQuestion}
                                 questionChange={setInputInterviewQuestion}
@@ -257,7 +287,8 @@ const AdminUpdatePage = (props) => {
                             />
                         )}
                         {/* Further Reading Input */}
-                        {(selectedContent === "4" || selectedContent === '7') && (
+                        {(selectedContent === "4" ||
+                            selectedContent === "7") && (
                             <FurtherReadingForm
                                 titleValue={inputFurtherReadingTitle}
                                 titleChange={setInputFurtherReadingTitle}
