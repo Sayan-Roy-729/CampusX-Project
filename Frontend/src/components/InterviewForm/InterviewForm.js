@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import FormGroup from "../FormGroup/FormGroup";
 
 const InterviewForm = props => {
@@ -6,7 +8,7 @@ const InterviewForm = props => {
             <FormGroup
                 label="Interview Question"
                 className="col-md-6"
-                description="This is optional field. If you input this field then must have to fill next interview answer field."
+                description={props.description && "This is optional field. If you input this field then must have to fill next interview answer field."}
                 value={props.questionValue}
                 onChange={props.questionChange}
             />
@@ -18,6 +20,13 @@ const InterviewForm = props => {
             />
         </div>
     );
+};
+
+InterviewForm.propTypes = {
+    questionValue: PropTypes.string.isRequired,
+    questionChange: PropTypes.func.isRequired,
+    answerValue: PropTypes.string.isRequired,
+    answerChange: PropTypes.func.isRequired,
 };
 
 export default InterviewForm;

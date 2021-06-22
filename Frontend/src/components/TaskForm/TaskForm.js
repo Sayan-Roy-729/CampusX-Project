@@ -6,7 +6,7 @@ const TaskForm = props => {
             <FormGroup
                 label="Question of the task"
                 className="col-md-6"
-                description="This is optional field. If you input this field then must have to fill next interview answer field."
+                description={props.description && "This is optional field. If you input this field then must have to fill next interview answer field."}
                 value={props.taskValue}
                 onChange={props.changeTaskValue}
             />

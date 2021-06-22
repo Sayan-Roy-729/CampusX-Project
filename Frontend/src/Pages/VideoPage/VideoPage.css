@@ -13,3 +13,15 @@
 .video_play_content_group::-webkit-scrollbar {
     display: none;
 }
+
+@media (max-width: 576px) {
+    .video__list__group {
+        height: initial;
+    }
+}
+
+@media (max-width: 768px) {
+    .video__list__group {
+        height: initial;
+    }
+}

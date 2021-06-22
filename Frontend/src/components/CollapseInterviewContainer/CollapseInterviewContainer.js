@@ -15,14 +15,16 @@ const CollapseInterviewContainer = props => {
             <div id="interview" className="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
                 <div className="card-body">
                     {
-                        interview.length > 0 && interview.map(item => {
+                        interview.length > 0 ? interview.map(item => {
                             return (
                                 <div key = {item.id}>
                                     <h5 className = "text-muted"><strong>{item.question}</strong></h5>
                                     <p><span style={{fontWeight: 'bolder'}}>Ans: </span>{item.answer}</p>
                                 </div>
                             );
-                        })
+                        }) : (
+                            <h4 className = "text-muted text-center">There is no interview questions related to this video</h4>
+                        )
                     }
                 </div>
             </div>

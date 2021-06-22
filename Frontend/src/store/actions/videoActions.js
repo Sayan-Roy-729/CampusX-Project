@@ -222,113 +222,115 @@ export const updateFurtherReading = (furtherReadingData) => {
 };
 
 // Delete video
-export const deleteVideo = videoId => {
-    return async dispatch => {
-        dispatch({type: videoConstants.DELETE_LOADING});
+export const deleteVideo = (videoId) => {
+    return async (dispatch) => {
+        dispatch({ type: videoConstants.DELETE_LOADING });
         try {
             // const response = await axios.delete('/admin/video', videoId);
             await axios({
-                method: 'DELETE',
-                url: '/admin/video',
+                method: "DELETE",
+                url: "/admin/video",
                 headers: {
-                    'Content-Type': 'application/json',
+                    "Content-Type": "application/json",
                 },
                 data: {
-                    videoId
-                }
+                    videoId,
+                },
             });
-            dispatch({type: videoConstants.DELETE_FAILURE});
+            dispatch({ type: videoConstants.DELETE_FAILURE });
         } catch (error) {
-            dispatch({type: videoConstants.DELETE_FAILURE});
+            dispatch({ type: videoConstants.DELETE_FAILURE });
         }
-
     };
 };
 
 // Delete Task
-export const deleteTask = taskId => {
-    return async dispatch => {
-        dispatch({type: videoConstants.DELETE_LOADING});
+export const deleteTask = (taskId) => {
+    return async (dispatch) => {
+        dispatch({ type: videoConstants.DELETE_LOADING });
         try {
             await axios({
-                method: 'DELETE',
-                url: '/admin/task',
+                method: "DELETE",
+                url: "/admin/task",
                 headers: {
-                    'Content-Type': 'application/json',
+                    "Content-Type": "application/json",
                 },
                 data: {
-                    taskId
-                }
+                    taskId,
+                },
             });
-            dispatch({type: videoConstants.DELETE_FAILURE});
+            dispatch({ type: videoConstants.DELETE_FAILURE });
         } catch (error) {
-            dispatch({type: videoConstants.DELETE_FAILURE});
+            dispatch({ type: videoConstants.DELETE_FAILURE });
         }
     };
-}
+};
 
 // Delete Quiz
-export const deleteQuiz = quizId => {
-    return async dispatch => {
-        dispatch({type: videoConstants.DELETE_LOADING});
-        try {
-            await axios({
-                method: 'DELETE',
-                url: '/admin/quiz',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                data: {
-                    quizId
-                }
+export const deleteQuiz = (quizId) => {
+    return async (dispatch) => {
+        dispatch({ type: videoConstants.DELETE_LOADING });
+        console.log('quiz id: ', quizId);
+        axios({
+            url: "/admin/quiz",
+            method: "DELETE",
+            data: {
+                quizId: quizId
+            },
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then((response) => {
+                console.log(response);
+            })
+            .catch((error) => {
+                console.log("Axios error: ", error);
+                dispatch({ type: videoConstants.DELETE_FAILURE });
             });
-            dispatch({type: videoConstants.DELETE_FAILURE});
-        } catch (error) {
-            dispatch({type: videoConstants.DELETE_FAILURE});
-        }
     };
-}
+};
 
 // Delete Interview
-export const deleteInterview = interviewId => {
-    return async dispatch => {
-        dispatch({type: videoConstants.DELETE_LOADING});
+export const deleteInterview = (interviewId) => {
+    return async (dispatch) => {
+        dispatch({ type: videoConstants.DELETE_LOADING });
         try {
             await axios({
-                method: 'DELETE',
-                url: '/admin/interview',
+                method: "DELETE",
+                url: "/admin/interview",
                 headers: {
-                    'Content-Type': 'application/json',
+                    "Content-Type": "application/json",
                 },
                 data: {
-                    interviewId
-                }
+                    interviewId,
+                },
             });
-            dispatch({type: videoConstants.DELETE_FAILURE});
+            dispatch({ type: videoConstants.DELETE_FAILURE });
         } catch (error) {
-            dispatch({type: videoConstants.DELETE_FAILURE});
+            dispatch({ type: videoConstants.DELETE_FAILURE });
         }
     };
-}
+};
 
 // Delete Further Reading
-export const deleteFurtherReading = furtherReadingId => {
-    return async dispatch => {
-        dispatch({type: videoConstants.DELETE_LOADING});
+export const deleteFurtherReading = (furtherReadingId) => {
+    return async (dispatch) => {
+        dispatch({ type: videoConstants.DELETE_LOADING });
         try {
             await axios({
-                method: 'DELETE',
-                url: '/admin/further-reading',
+                method: "DELETE",
+                url: "/admin/further-reading",
                 headers: {
-                    'Content-Type': 'application/json',
+                    "Content-Type": "application/json",
                 },
                 data: {
-                    furtherReadingId
-                }
+                    furtherReadingId,
+                },
             });
-            dispatch({type: videoConstants.DELETE_FAILURE});
+            dispatch({ type: videoConstants.DELETE_FAILURE });
         } catch (error) {
-            dispatch({type: videoConstants.DELETE_FAILURE});
+            dispatch({ type: videoConstants.DELETE_FAILURE });
         }
     };
-}
+};

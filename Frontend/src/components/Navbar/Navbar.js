@@ -1,33 +1,32 @@
-import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import './Navbar.css';
 import { googleSignIn, userSignOut } from '../../store/actions/authActions';
+import alertMessage from '../../config/alertMessage';
 
 const Navbar = props => {
     const authState = useSelector(state => state.auth);
     const dispatch = useDispatch();
-
-    useEffect(() => {
-        const navbar = document.querySelector('nav');
-        window.addEventListener('scroll', (event) => {
-            if (window.pageYOffset>= 100) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-    }, []);
+    const history = useHistory();
 
     const loginHandler = () => {
         dispatch(googleSignIn());
     };
-
     const logoutHandler = () => {
         dispatch(userSignOut());
     };
 
+    // Validate authentication
+    const videoPageRouteHandler = () => {
+        if (authState.user) {
+            history.push('/videos');
+        } else {
+            history.replace('/');
+            alertMessage('error', 'Error', 'You have to sign in to go forward', false, true);
+        }
+    };
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
             <Link className="navbar-brand" to="/" style={{fontFamily: 'Pacifico'}}>campusX</Link>
@@ -41,7 +40,7 @@ const Navbar = props => {
                         <Link className="nav-link" to="/">Home</Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link" to="/videos">Videos</Link>
+                        <Link className="nav-link" to="#" onClick = {videoPageRouteHandler}>Videos</Link>
                     </li>
                     <li className="nav-item">
                         <Link className="nav-link" to="/admin">Admin</Link>

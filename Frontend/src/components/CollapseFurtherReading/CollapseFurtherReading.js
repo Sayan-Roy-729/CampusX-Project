@@ -17,7 +17,7 @@ const CollapseFurtherReading = props => {
             <div id="further-reading" className="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
                 <div className="card-body">
                     {
-                        furtherReading.length > 0 && (
+                        furtherReading.length > 0 ? (
                             furtherReading.map((item, index) => {
                                 return (
                                     <div className = "Further__Reading" key = {index}>
@@ -26,6 +26,8 @@ const CollapseFurtherReading = props => {
                                     </div>
                                 )
                             })
+                        ) : (
+                            <h4 className = "text-muted text-center">There no further reading content related to this video</h4>
                         )
                     }
                 </div>

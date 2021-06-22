@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from "react-redux";
 import "./AdminUpdatePage.css";
 import VideoContentSelect from "../../components/VideoContentSelect/VideoContentSelect";
 import DropdownSelect from "../../components/DropdownSelect/DropdownSelect";
-import UpdateSelectOptions from "../../components/UpdateSelectOptions/UpdateSelectOptions";
 import QuizForm from "../../components/QuizForm/QuizForm";
 import InterviewForm from "../../components/InterviewForm/InterviewForm";
 import FurtherReadingForm from "../../components/FurtherReadingForm/FurtherReadingForm";
@@ -58,7 +57,7 @@ const AdminUpdatePage = (props) => {
         setInputInterviewAnswer("");
         setInputFurtherReadingTitle("");
         setInputFurtherReadingURL("");
-        if (videosState.task.id) {
+        if (videosState.task && videosState.task.id) {
             setInputTaskQuestion(videosState.task.question);
             setInputTaskSolution(videosState.task.solution);
         }

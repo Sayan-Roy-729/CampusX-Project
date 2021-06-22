@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 
 import VideoContentSelect from "../../components/VideoContentSelect/VideoContentSelect";
@@ -6,7 +6,7 @@ import alertMessage from "../../config/alertMessage";
 // import { deleteVideo } from '../../store/actions/videoActions';
 import { deleteVideo, deleteTask } from '../../store/actions/videoActions';
 import { deleteQuiz, deleteInterview } from '../../store/actions/videoActions';
-import { deleteFurtherReading } from "../../store/actions/videoActions";
+import { deleteFurtherReading, videoContent } from "../../store/actions/videoActions";
 import DropdownSelect from "../../components/DropdownSelect/DropdownSelect";
 
 const AdminDeletePage = (props) => {
@@ -19,6 +19,13 @@ const AdminDeletePage = (props) => {
     const videos = videoState.videos;
     const dispatch = useDispatch();
 
+    // Fetch contents related to the video
+    useEffect(() => {
+        if (selectedVideoId) {
+            dispatch(videoContent(selectedVideoId));
+        }
+    }, [dispatch, selectedVideoId]);
+
     // Select the video
     const videoSelectHandler = (event) => {
         setSelectedVideoId(event.target.value);
@@ -29,10 +36,9 @@ const AdminDeletePage = (props) => {
         setSelectedContent(event.target.value);
     };
 
-    console.log(props);
-
     const formSubmitHandler =  async (event) => {
         event.preventDefault();
+        const contents = new URLSearchParams();
         // Delete the video
         if (selectedVideoId && !selectedContent) {
             await dispatch(deleteVideo(selectedVideoId));
@@ -43,6 +49,7 @@ const AdminDeletePage = (props) => {
             }
         } else if (selectedVideoId && selectedContent === '2') {
             // Delete Quiz
+            contents.append('quizId', selectedQuiz);
             await dispatch(deleteQuiz(selectedQuiz));
         } else if (selectedVideoId && selectedContent === '3') {
             // Delete interview
@@ -58,6 +65,7 @@ const AdminDeletePage = (props) => {
         alertMessage('error', 'Error', 'Your operation is failed! Try again', false, true);
     }
 
+    // If there is no video, then render it
     if (!videos || videos.length <= 0) {
         return (
             <div className = "container">
@@ -93,7 +101,7 @@ const AdminDeletePage = (props) => {
                                 <DropdownSelect
                                     default = 'Choose the quiz...'
                                     quizzes = {videoState.quizzes}
-                                    onChange = {setSelectedQuiz}
+                                    onChange = {e => setSelectedQuiz(e.target.value)}
                                 />
                             )
                         }
@@ -102,7 +110,7 @@ const AdminDeletePage = (props) => {
                                 <DropdownSelect 
                                     default = 'Choose the interview question...'
                                     interview = {videoState.interview}
-                                    onChange = {setSelectedInterview}
+                                    onChange = {e => setSelectedInterview(e.target.value)}
                                 />
                             )
                         }
@@ -111,13 +119,13 @@ const AdminDeletePage = (props) => {
                                 <DropdownSelect 
                                     default = 'Choose the further reading content...'
                                     furtherReading = {videoState.furtherReading}
-                                    onChange = {setSelectedFurtherReading}
+                                    onChange = {e => setSelectedFurtherReading(e.target.value)}
                                 />
                             )
                         }
                         <button
                             type="submit"
-                            className="btn btn-dark float-right"
+                            className="btn btn-dark float-right mt-3"
                             disabled={!selectedVideoId ? true : false}
                         >
                             Delete

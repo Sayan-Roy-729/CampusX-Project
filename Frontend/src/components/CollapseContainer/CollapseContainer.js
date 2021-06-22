@@ -11,10 +11,7 @@ const CollapseContainer = (props) => {
                 taskSolution="This is the solution of the task question."
             />
             <CollapseQuizContainer quizQuestion="This is the quiz question" />
-            <CollapseInterviewContainer
-                interviewQuestion="This is the interview question"
-                interviewAnswer="This is the answer of the interview question"
-            />
+            <CollapseInterviewContainer />
             <CollapseFurtherReading />
         </div>
     );

@@ -26,7 +26,7 @@ const VideoPage = props => {
             setVideoId(videos[0].id);
             dispatch(videoContent(videos[0].id));
         }
-    }, [dispatch, videoId, videos.length]);
+    }, [dispatch, videoId, videos.length, videos]);
 
     if (!videos || videos.length <= 0) {
         return (
@@ -51,10 +51,10 @@ const VideoPage = props => {
                         videos.map(video => {
                             if (video.id === videoId) {
                                 return (
-                                    <>
+                                    <div key = {video.id}>
                                     <h2 className="text-muted" style={{fontWeight: 'bold'}}>{video.title}</h2>
                                     <VideoFrame src = {videos.find(video => video.id === videoId).url}/>
-                                    </>
+                                    </div>
                                 )
                             } else {
                                 return null;

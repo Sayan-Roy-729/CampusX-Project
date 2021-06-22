@@ -10,6 +10,7 @@ import { uploadContent } from "../../store/actions/videoActions";
 import TaskForm from "../TaskForm/TaskForm";
 
 const AdminForm = (props) => {
+    // States of the form
     const [inputVideoTitle, setInputVideoTitle] = useState("");
     const [inputVideo, setInputVideo] = useState("");
     const [inputTaskQuestion, setInputTaskQuestion] = useState("");
@@ -25,16 +26,17 @@ const AdminForm = (props) => {
     const [inputFurtherReadingTitle, setInputFurtherReadingTitle] =
         useState("");
     const [inputFurtherReadingURL, setInputFurtherReadingURL] = useState("");
-
+    
     const dispatch = useDispatch();
-
+    // Set id of the quiz which is the user selected
     const quizOptionChooseHandler = (event) => {
         setQuizOptionsAns(event.target.value);
     };
 
+    // Submit the form
     const formSubmitHandler = async (event) => {
         event.preventDefault();
-
+        // Create a form encoded data
         const contents = new URLSearchParams();
         contents.append("videoTitle", inputVideo);
         contents.append("videoUrl", inputVideoTitle);
@@ -50,7 +52,7 @@ const AdminForm = (props) => {
         contents.append("interviewAnswer", inputInterviewAnswer);
         contents.append("furtherReadingTitle", inputFurtherReadingTitle);
         contents.append("furtherReadingUrl", inputFurtherReadingURL);
-
+        // Validate the video related inputs 
         if (
             !inputVideoTitle ||
             inputVideoTitle === "" ||
@@ -66,7 +68,7 @@ const AdminForm = (props) => {
             );
             return;
         }
-
+        // Validate Quiz related inputs
         if (
             inputQuizQuestion &&
             (!inputQuizAnswer1 ||
@@ -84,7 +86,7 @@ const AdminForm = (props) => {
             );
             return;
         }
-
+        // Validate the task related inputs
         if (inputTaskQuestion && !inputTaskSolution) {
             alertMessage(
                 "error",
@@ -95,7 +97,7 @@ const AdminForm = (props) => {
             );
             return;
         }
-
+        // Validate the interview related inputs
         if (inputInterviewQuestion && !inputInterviewAnswer) {
             alertMessage(
                 "error",
@@ -106,7 +108,7 @@ const AdminForm = (props) => {
             );
             return;
         }
-
+        // Validate the further reading related inputs
         if (inputFurtherReadingTitle && !inputFurtherReadingURL) {
             alertMessage(
                 "error",
@@ -117,7 +119,7 @@ const AdminForm = (props) => {
             );
             return;
         }
-
+        // Submit the form by passing data to the actions 
         try {
             await dispatch(uploadContent(contents));
             alertMessage(
@@ -140,28 +142,31 @@ const AdminForm = (props) => {
 
     return (
         <form onSubmit={formSubmitHandler} style={{ marginBottom: "60px" }}>
+            {/* Input Video Title */}
             <FormGroup
                 label="Video title"
                 description="Title of the Video. Required"
                 value={inputVideo}
                 onChange={setInputVideo}
             />
-
+            {/* Input video embed url */}
             <FormGroup
                 label="Video URL"
                 description="Please enter the iframe YouTube Video URL. This is required"
                 value={inputVideoTitle}
                 onChange={setInputVideoTitle}
             />
-
+            {/* Input Task related form */}
             <TaskForm
+                description
                 taskValue={inputTaskQuestion}
                 changeTaskValue={setInputTaskQuestion}
                 taskSolutionValue={inputTaskSolution}
                 changeTaskSolutionValue={setInputTaskSolution}
             />
-
+            {/* Input quiz related form */}
             <QuizForm
+                description
                 inputQuizQuestion={inputQuizQuestion}
                 setInputQuizQuestion={setInputQuizQuestion}
                 inputQuizAnswer1={inputQuizAnswer1}
@@ -174,26 +179,29 @@ const AdminForm = (props) => {
                 setInputQuizAnswer4={setInputQuizAnswer4}
                 quizOptionChooseHandler={quizOptionChooseHandler}
             />
-
+            {/* Input interview related form */}
             <InterviewForm
+                description
                 questionValue={inputInterviewQuestion}
                 questionChange={setInputInterviewQuestion}
                 answerValue={inputInterviewAnswer}
                 answerChange={setInputInterviewAnswer}
             />
-
+            {/* Input Further Reading Content related form */}
             <FurtherReadingForm
+                description
                 titleValue={inputFurtherReadingTitle}
                 titleChange={setInputFurtherReadingTitle}
                 urlValue={inputFurtherReadingURL}
                 urlChange={setInputFurtherReadingURL}
             />
-
+            {/* Submit button */}
             <button type="submit" className="btn btn-dark btn-block">
                 Add
             </button>
         </form>
     );
 };
+
 
 export default AdminForm;

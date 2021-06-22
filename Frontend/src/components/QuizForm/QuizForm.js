@@ -6,7 +6,7 @@ const QuizForm = (props) => {
         <>
             <FormGroup
                 label="Quiz Question"
-                description="This is optional field. If you input this field then must have to fill the 4 options and have to choose the right option also"
+                description={props.description && "This is optional field. If you input this field then must have to fill the 4 options and have to choose the right option also"}
                 value={props.inputQuizQuestion}
                 onChange={props.setInputQuizQuestion}
             />

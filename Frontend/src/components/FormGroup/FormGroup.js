@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 const FormGroup = (props) => {
     return (
         <div className={`form-group ${props.className}`}>
@@ -15,6 +17,14 @@ const FormGroup = (props) => {
             )}
         </div>
     );
+};
+
+FormGroup.propTypes = {
+    className: PropTypes.string,
+    label: PropTypes.string.isRequired,
+    value: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired,
+    description: PropTypes.string,
 };
 
 export default FormGroup;
