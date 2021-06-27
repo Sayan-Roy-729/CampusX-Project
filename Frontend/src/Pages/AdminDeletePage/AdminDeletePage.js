@@ -6,7 +6,7 @@ import alertMessage from "../../config/alertMessage";
 // import { deleteVideo } from '../../store/actions/videoActions';
 import { deleteVideo, deleteTask } from '../../store/actions/videoActions';
 import { deleteQuiz, deleteInterview } from '../../store/actions/videoActions';
-import { deleteFurtherReading, videoContent } from "../../store/actions/videoActions";
+import { deleteFurtherReading, videoContent, clearErrorMessage } from "../../store/actions/videoActions";
 import DropdownSelect from "../../components/DropdownSelect/DropdownSelect";
 
 const AdminDeletePage = (props) => {
@@ -76,6 +76,12 @@ const AdminDeletePage = (props) => {
                 </div>
             </div>
         );
+    }
+
+    // If any error occurred, show that and clear from the state
+    if (videoState.errorMessage) {
+        alertMessage('error', 'Error', videoState.errorMessage, false, true);
+        dispatch(clearErrorMessage());
     }
 
     return (

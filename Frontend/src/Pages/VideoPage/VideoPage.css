@@ -17,6 +17,7 @@
 @media (max-width: 576px) {
     .video__list__group {
         height: initial;
+        max-height: 50vh;
     }
 }
 

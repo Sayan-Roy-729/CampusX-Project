@@ -5,10 +5,12 @@ import './VideoPage.css';
 import VideoList from '../../components/VideoList/VideoList';
 import VideoFrame from '../../components/VideoFrame/VideoFrame';
 import CollapseContainer from '../../components/CollapseContainer/CollapseContainer';
+import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 import { videoContent } from '../../store/actions/videoActions';
 
 const VideoPage = props => {
     const videos = useSelector(state => state.video.videos);
+    const videoState = useSelector(state => state.video);
     const [videoId, setVideoId] = useState(videos.length > 0 ? videos[0].id : null);
     const dispatch = useDispatch();
 
@@ -28,6 +30,14 @@ const VideoPage = props => {
         }
     }, [dispatch, videoId, videos.length, videos]);
 
+    // If the state is loading, then show spinner
+    if (videoState.loading) {
+        return (
+            <LoadingSpinner />
+        );
+    }
+
+    // If there is no videos, then show this
     if (!videos || videos.length <= 0) {
         return (
             <div className = "container">

@@ -107,12 +107,12 @@ export const uploadContent = (formData) => {
 // Update a task
 export const updateTask = (taskData) => {
     return async (dispatch) => {
-        dispatch({ type: videoConstants.TASK_LOADING });
+        dispatch({ type: videoConstants.CHANGE_CONTENT_LOADING });
         try {
             await axios.post("/admin/task?update=1", taskData);
-            dispatch({ type: videoConstants.TASK_SUCCESS });
+            dispatch({ type: videoConstants.CHANGE_CONTENT_SUCCESS});
         } catch (error) {
-            dispatch({ type: videoConstants.TASK_FAILURE });
+            dispatch({ type: videoConstants.CHANGE_CONTENT_FAILURE, errorMessage: error.message });
         }
     };
 };
@@ -120,12 +120,12 @@ export const updateTask = (taskData) => {
 // Upload a task
 export const uploadTask = (taskData) => {
     return async (dispatch) => {
-        dispatch({ type: videoConstants.TASK_LOADING });
+        dispatch({ type: videoConstants.CHANGE_CONTENT_LOADING });
         try {
             await axios.post("/admin/task", taskData);
-            dispatch({ type: videoConstants.TASK_SUCCESS });
+            dispatch({ type: videoConstants.CHANGE_CONTENT_SUCCESS });
         } catch (error) {
-            dispatch({ type: videoConstants.TASK_FAILURE });
+            dispatch({ type: videoConstants.CHANGE_CONTENT_FAILURE, errorMessage: error.message });
         }
     };
 };
@@ -133,16 +133,16 @@ export const uploadTask = (taskData) => {
 // Upload a quiz
 export const uploadQuiz = (quizData) => {
     return async (dispatch) => {
-        dispatch({ type: videoConstants.UPLOAD_QUIZ_LOADING });
+        dispatch({ type: videoConstants.CHANGE_CONTENT_LOADING });
 
         try {
             await axios.post("/admin/quiz", quizData);
             dispatch({
-                type: videoConstants.UPLOAD_QUIZ_SUCCESS,
+                type: videoConstants.CHANGE_CONTENT_SUCCESS,
             });
         } catch (error) {
             dispatch({
-                type: videoConstants.UPLOAD_QUIZ_FAILURE,
+                type: videoConstants.CHANGE_CONTENT_FAILURE, errorMessage: error.message,
             });
         }
     };
@@ -151,13 +151,13 @@ export const uploadQuiz = (quizData) => {
 // Update a quiz
 export const updateQuiz = (quizData) => {
     return async (dispatch) => {
-        dispatch({ type: videoConstants.UPDATE_QUIZ_LOADING });
+        dispatch({ type: videoConstants.CHANGE_CONTENT_LOADING});
 
         try {
             await axios.post("/admin/quiz?update=1", quizData);
-            dispatch({ type: videoConstants.UPDATE_QUIZ_SUCCESS });
+            dispatch({ type: videoConstants.CHANGE_CONTENT_SUCCESS });
         } catch (error) {
-            dispatch({ type: videoConstants.UPDATE_QUIZ_FAILURE });
+            dispatch({ type: videoConstants.CHANGE_CONTENT_FAILURE, errorMessage: error.message });
         }
     };
 };
@@ -165,13 +165,13 @@ export const updateQuiz = (quizData) => {
 // Upload a Interview
 export const uploadInterview = (interviewData) => {
     return async (dispatch) => {
-        dispatch({ type: videoConstants.UPLOAD_INTERVIEW_LOADING });
+        dispatch({ type: videoConstants.CHANGE_CONTENT_LOADING});
 
         try {
             await axios.post("/admin/interview", interviewData);
-            dispatch({ type: videoConstants.UPLOAD_INTERVIEW_SUCCESS });
+            dispatch({ type: videoConstants.CHANGE_CONTENT_SUCCESS });
         } catch (error) {
-            dispatch({ type: videoConstants.UPLOAD_INTERVIEW_FAILURE });
+            dispatch({ type: videoConstants.CHANGE_CONTENT_FAILURE, errorMessage: error.message});
         }
     };
 };
@@ -179,13 +179,13 @@ export const uploadInterview = (interviewData) => {
 // Update a Interview
 export const updateInterview = (interviewData) => {
     return async (dispatch) => {
-        dispatch({ type: videoConstants.UPDATE_INTERVIEW_LOADING });
+        dispatch({ type: videoConstants.CHANGE_CONTENT_LOADING});
 
         try {
             await axios.post("/admin/interview?update=1", interviewData);
-            dispatch({ type: videoConstants.UPDATE_INTERVIEW_SUCCESS });
+            dispatch({ type: videoConstants.CHANGE_CONTENT_SUCCESS });
         } catch (error) {
-            dispatch({ type: videoConstants.UPDATE_INTERVIEW_LOADING });
+            dispatch({ type: videoConstants.CHANGE_CONTENT_FAILURE, errorMessage: error.message });
         }
     };
 };
@@ -193,13 +193,13 @@ export const updateInterview = (interviewData) => {
 // Upload a Further Reading
 export const uploadFurtherReading = (furtherReadingData) => {
     return async (dispatch) => {
-        dispatch({ type: videoConstants.UPLOAD_FURTHER_READING_LOADING });
+        dispatch({ type: videoConstants.CHANGE_CONTENT_LOADING });
 
         try {
             await axios.post("/admin/further-reading", furtherReadingData);
-            dispatch({ type: videoConstants.UPLOAD_FURTHER_READING_SUCCESS });
+            dispatch({ type: videoConstants.CHANGE_CONTENT_SUCCESS });
         } catch (error) {
-            dispatch({ type: videoConstants.UPLOAD_FURTHER_READING_FAILURE });
+            dispatch({ type: videoConstants.CHANGE_CONTENT_FAILURE, errorMessage: error.message });
         }
     };
 };
@@ -207,16 +207,16 @@ export const uploadFurtherReading = (furtherReadingData) => {
 // Update a Interview
 export const updateFurtherReading = (furtherReadingData) => {
     return async (dispatch) => {
-        dispatch({ type: videoConstants.UPDATE_FURTHER_READING_LOADING });
+        dispatch({ type: videoConstants.CHANGE_CONTENT_LOADING });
 
         try {
             await axios.post(
                 "/admin/further-reading?update=1",
                 furtherReadingData
             );
-            dispatch({ type: videoConstants.UPDATE_FURTHER_READING_SUCCESS });
+            dispatch({ type: videoConstants.CHANGE_CONTENT_SUCCESS });
         } catch (error) {
-            dispatch({ type: videoConstants.UPDATE_FURTHER_READING_FAILURE });
+            dispatch({ type: videoConstants.CHANGE_CONTENT_FAILURE, errorMessage: error.message });
         }
     };
 };
@@ -224,7 +224,7 @@ export const updateFurtherReading = (furtherReadingData) => {
 // Delete video
 export const deleteVideo = (videoId) => {
     return async (dispatch) => {
-        dispatch({ type: videoConstants.DELETE_LOADING });
+        dispatch({ type: videoConstants.CHANGE_CONTENT_LOADING });
         try {
             // const response = await axios.delete('/admin/video', videoId);
             await axios({
@@ -237,9 +237,9 @@ export const deleteVideo = (videoId) => {
                     videoId,
                 },
             });
-            dispatch({ type: videoConstants.DELETE_FAILURE });
+            dispatch({ type: videoConstants.CHANGE_CONTENT_SUCCESS });
         } catch (error) {
-            dispatch({ type: videoConstants.DELETE_FAILURE });
+            dispatch({ type: videoConstants.CHANGE_CONTENT_FAILURE, errorMessage: error.message});
         }
     };
 };
@@ -247,7 +247,7 @@ export const deleteVideo = (videoId) => {
 // Delete Task
 export const deleteTask = (taskId) => {
     return async (dispatch) => {
-        dispatch({ type: videoConstants.DELETE_LOADING });
+        dispatch({ type: videoConstants.CHANGE_CONTENT_LOADING });
         try {
             await axios({
                 method: "DELETE",
@@ -259,9 +259,9 @@ export const deleteTask = (taskId) => {
                     taskId,
                 },
             });
-            dispatch({ type: videoConstants.DELETE_FAILURE });
+            dispatch({ type: videoConstants.CHANGE_CONTENT_SUCCESS });
         } catch (error) {
-            dispatch({ type: videoConstants.DELETE_FAILURE });
+            dispatch({ type: videoConstants.CHANGE_CONTENT_FAILURE, errorMessage: error.message });
         }
     };
 };
@@ -269,7 +269,7 @@ export const deleteTask = (taskId) => {
 // Delete Quiz
 export const deleteQuiz = (quizId) => {
     return async (dispatch) => {
-        dispatch({ type: videoConstants.DELETE_LOADING });
+        dispatch({ type: videoConstants.CHANGE_CONTENT_LOADING });
         console.log('quiz id: ', quizId);
         axios({
             url: "/admin/quiz",
@@ -282,11 +282,11 @@ export const deleteQuiz = (quizId) => {
             },
         })
             .then((response) => {
-                console.log(response);
+                dispatch({type: videoConstants.CHANGE_CONTENT_SUCCESS})
             })
             .catch((error) => {
                 console.log("Axios error: ", error);
-                dispatch({ type: videoConstants.DELETE_FAILURE });
+                dispatch({ type: videoConstants.CHANGE_CONTENT_FAILURE, errorMessage: error.message});
             });
     };
 };
@@ -294,7 +294,7 @@ export const deleteQuiz = (quizId) => {
 // Delete Interview
 export const deleteInterview = (interviewId) => {
     return async (dispatch) => {
-        dispatch({ type: videoConstants.DELETE_LOADING });
+        dispatch({ type: videoConstants.CHANGE_CONTENT_LOADING });
         try {
             await axios({
                 method: "DELETE",
@@ -306,9 +306,9 @@ export const deleteInterview = (interviewId) => {
                     interviewId,
                 },
             });
-            dispatch({ type: videoConstants.DELETE_FAILURE });
+            dispatch({ type: videoConstants.CHANGE_CONTENT_SUCCESS});
         } catch (error) {
-            dispatch({ type: videoConstants.DELETE_FAILURE });
+            dispatch({ type: videoConstants.CHANGE_CONTENT_FAILURE, errorMessage: error.message});
         }
     };
 };
@@ -316,7 +316,7 @@ export const deleteInterview = (interviewId) => {
 // Delete Further Reading
 export const deleteFurtherReading = (furtherReadingId) => {
     return async (dispatch) => {
-        dispatch({ type: videoConstants.DELETE_LOADING });
+        dispatch({ type: videoConstants.CHANGE_CONTENT_LOADING });
         try {
             await axios({
                 method: "DELETE",
@@ -328,9 +328,15 @@ export const deleteFurtherReading = (furtherReadingId) => {
                     furtherReadingId,
                 },
             });
-            dispatch({ type: videoConstants.DELETE_FAILURE });
+            dispatch({ type: videoConstants.CHANGE_CONTENT_SUCCESS });
         } catch (error) {
-            dispatch({ type: videoConstants.DELETE_FAILURE });
+            dispatch({ type: videoConstants.CHANGE_CONTENT_FAILURE, errorMessage: error.message });
         }
+    };
+};
+
+export const clearErrorMessage = () => {
+    return {
+        type: videoConstants.CLEAR_ERROR_MESSAGE,
     };
 };

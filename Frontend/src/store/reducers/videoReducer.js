@@ -64,21 +64,27 @@ const videoReducer = (state = initialState, action) => {
                 loading: false,
                 errorMessage: action.errorMessage,
             };
-        case videoConstants.UPLOAD_QUIZ_LOADING:
+        case videoConstants.CHANGE_CONTENT_LOADING:
             return {
                 ...state,
                 loading: true,
             };
-        case videoConstants.UPLOAD_QUIZ_SUCCESS:
+        case videoConstants.CHANGE_CONTENT_SUCCESS:
             return {
                 ...state,
                 loading: false,
             };
-        case videoConstants.UPLOAD_QUIZ_FAILURE:
+        case videoConstants.CHANGE_CONTENT_FAILURE:
             return {
                 ...state,
                 loading: false,
                 errorMessage: action.errorMessage,
+            };
+        case videoConstants.CLEAR_ERROR_MESSAGE:
+            return {
+                ...state,
+                loading: false,
+                errorMessage: null,
             };
         default:
             return state;

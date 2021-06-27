@@ -12,7 +12,7 @@ import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import alertMessage from "../../config/alertMessage";
 import { uploadQuiz, uploadTask } from "../../store/actions/videoActions";
 import { uploadInterview } from "../../store/actions/videoActions";
-import { uploadFurtherReading } from "../../store/actions/videoActions";
+import { uploadFurtherReading, clearErrorMessage } from "../../store/actions/videoActions";
 import { videoContent, updateTask } from "../../store/actions/videoActions";
 import { updateQuiz, updateInterview } from "../../store/actions/videoActions";
 import { updateFurtherReading } from "../../store/actions/videoActions";
@@ -188,6 +188,12 @@ const AdminUpdatePage = (props) => {
                 </div>
             </div>
         );
+    }
+
+    // If any error occurred, show that and clear from the state
+    if (videosState.errorMessage) {
+        alertMessage('error', 'Error', videosState.errorMessage, false, true);
+        dispatch(clearErrorMessage());
     }
 
     return (

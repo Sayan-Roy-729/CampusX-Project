@@ -138,6 +138,20 @@ const AdminForm = (props) => {
                 true
             );
         }
+        // Clear the inputs
+        setInputVideoTitle('');
+        setInputVideo('');
+        setInputTaskQuestion('');
+        setInputTaskSolution('');
+        setInputQuizQuestion('');
+        setInputQuizAnswer1('');
+        setInputQuizAnswer2('');
+        setInputQuizAnswer3('');
+        setInputQuizAnswer4('');
+        setInputInterviewQuestion('');
+        setInputInterviewAnswer('');
+        setInputFurtherReadingTitle('');
+        setInputFurtherReadingURL('');
     };
 
     return (

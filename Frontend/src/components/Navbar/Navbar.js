@@ -42,9 +42,13 @@ const Navbar = props => {
                     <li className="nav-item">
                         <Link className="nav-link" to="#" onClick = {videoPageRouteHandler}>Videos</Link>
                     </li>
-                    <li className="nav-item">
-                        <Link className="nav-link" to="/admin">Admin</Link>
-                    </li>
+                    {
+                        (authState.user && authState.user.email === 'rsayan553@gmail.com') && (
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/admin">Admin</Link>
+                            </li>
+                        )
+                    }
                     <li className="nav-item">
                         {
                             authState.user ? (
